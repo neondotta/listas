@@ -59,8 +59,36 @@ public class Lista {
 	  public void remove(int posicao){}
 	  public int tamanho() {return 0;}
 	  public boolean contem(Object o) {return false;}
-	  public void removeDoComeco() {}
-	  public void removeDoFim() {}
+	  public void removeDoComeco() {
+		  //Garante a integridade, verificando se há um objeto na primeira posição da lista.
+		  if(!this.posicaoOcupada(0)){
+			  throw new IllegalArgumentException("Posição inexistente");
+		  }
+		  
+		  //Elima a primeira posição da lista e diminui o total de elementos em nossa lista.
+		  this.primeira = this.primeira.getProxima();
+		  this.totalDeElementos--;
+		  //Se a lista estiver vazia, se retornar true, garante o tail apresente a opção null.
+		  if(this.totalDeElementos == 0){
+			  this.ultima = null;
+		  }
+	  }
+	  public void removeDoFim() {
+		  if(!this.posicaoOcupada(posicao - 1)){
+			  throw new IllegalArgumentException("Posição inexistente");
+		  }
+		  
+		  if(this.totalDeElementos == 1){
+			  removeDoComeco();
+		  }
+		  
+		  this.ultima = this.ultima.getProxima();
+		  this.totalDeElementos--;
+		  if(this.totalDeElementos == 0){
+			  this.primeira = null;
+			  this.ultima = null;
+		  }
+	  }
 	
 	  public String toString(){
 		  
