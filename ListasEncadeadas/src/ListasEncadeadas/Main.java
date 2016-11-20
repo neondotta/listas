@@ -15,8 +15,11 @@ public class Main {
 /*		lista.remove(2);
 		System.out.println(lista)*/;
 		
-		System.out.println(lista.contem("Roger"));
+		System.out.println(lista.contem("MK"));
 		
+		lista.adiciona(3, "MK");
+		System.out.println(lista.contem("MK"));		
+		System.out.println(lista);
 		
 	}
 

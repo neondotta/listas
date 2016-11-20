@@ -8,10 +8,11 @@ public class Lista {
 	
 	  public void adiciona(Object elemento) {
 		  if(this.totalDeElementos == 0){
-			  adicionaNoComeco(elemento);
+			  this.adicionaNoComeco(elemento);
 		  }else{
 			  Celula nova = new Celula(elemento);
 			  this.ultima.setProxima(nova);
+			  nova.setAnterior(this.ultima);
 			  this.ultima = nova;
 			  this.totalDeElementos++;
 		  }
@@ -24,18 +25,25 @@ public class Lista {
 			  adiciona(elemento);
 		  }else{
 			  Celula anterior = this.pegaCelula(posicao - 1);
+			  Celula proxima = anterior.getProxima();
 			  Celula nova = new Celula(anterior.getProxima(), elemento);
+			  nova.setAnterior(anterior);
 			  anterior.setProxima(nova);
+			  proxima.setAnterior(nova);
 			  this.totalDeElementos++;
 		  }
 	  }
 	  public void adicionaNoComeco(Object elemento) {
-		  Celula nova = new Celula(this.primeira, elemento);
-		  this.primeira = nova;
 		  
 		  // caso especial da lista vazia
 		  if(this.totalDeElementos == 0){
-			  this.ultima = this.primeira;
+			  Celula nova = new Celula(elemento);
+			  this.primeira = nova;
+			  this.ultima = nova;
+		  }else{
+			  Celula nova = new Celula(this.primeira, elemento);
+			  this.primeira.setAnterior(nova);
+			  this.primeira = nova;
 		  }
 		  this.totalDeElementos++;
 	  }
