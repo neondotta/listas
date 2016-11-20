@@ -56,9 +56,29 @@ public class Lista {
 	  public Object pega(int posicao){
 		  return this.pegaCelula(posicao).getElemento();
 	  }
-	  public void remove(int posicao){}
-	  public int tamanho() {return 0;}
+	  public int tamanho() {return totalDeElementos;}
 	  public boolean contem(Object o) {return false;}
+	  public void remove(int posicao){
+		  
+		  if(!this.posicaoOcupada(posicao)){
+			  throw new IllegalArgumentException("Posição inexistente");
+		  }
+		  
+		  if(posicao == this.totalDeElementos - 1){
+			  removeDoFim();
+		  }else if(posicao == 0){
+			  removeDoComeco();
+		  }else{
+			  Celula anterior = this.pegaCelula(posicao - 1);
+			  Celula atual = anterior.getProxima();
+			  Celula proxima = atual.getProxima();
+			  
+			  proxima.setAnterior(anterior);
+			  anterior.setProxima(proxima);
+			  
+			  this.totalDeElementos--;
+		  }
+	  }
 	  public void removeDoComeco() {
 		  //Garante a integridade, verificando se há um objeto na primeira posição da lista.
 		  if(!this.posicaoOcupada(0)){
@@ -74,19 +94,24 @@ public class Lista {
 		  }
 	  }
 	  public void removeDoFim() {
-		  if(!this.posicaoOcupada(posicao - 1)){
+		  if(!this.posicaoOcupada(this.totalDeElementos - 1)){
 			  throw new IllegalArgumentException("Posição inexistente");
 		  }
 		  
 		  if(this.totalDeElementos == 1){
 			  removeDoComeco();
 		  }
-		  
-		  this.ultima = this.ultima.getProxima();
-		  this.totalDeElementos--;
-		  if(this.totalDeElementos == 0){
-			  this.primeira = null;
-			  this.ultima = null;
+		  else{
+			  /*
+			   * Criando penultima Célula,
+			   * Apontando que a proxima celula da penultima será null.
+			   * Apontando a ultima celula para a penultima.
+			   * Diminuir quantidade de elementos da lista.
+			   */
+			  Celula penultima = this.ultima.getAnterior();
+			  penultima.setProxima(null);
+			  this.ultima = penultima;
+			  this.totalDeElementos--;
 		  }
 	  }
 	
