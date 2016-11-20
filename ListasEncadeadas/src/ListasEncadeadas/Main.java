@@ -12,10 +12,12 @@ public class Main {
 		lista.adiciona("Fabi");
 		System.out.println(lista);
 		System.out.println(lista.tamanho());
-		lista.remove(2);
-		System.out.println(lista);
+/*		lista.remove(2);
+		System.out.println(lista)*/;
 		
-
+		System.out.println(lista.contem("Roger"));
+		
+		
 	}
 
 }

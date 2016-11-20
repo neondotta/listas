@@ -57,7 +57,23 @@ public class Lista {
 		  return this.pegaCelula(posicao).getElemento();
 	  }
 	  public int tamanho() {return totalDeElementos;}
-	  public boolean contem(Object o) {return false;}
+	  public boolean contem	(Object elemento) {
+
+		  Celula atual = this.primeira;
+		  
+		  while(atual != null){
+			  
+			  if(atual.getElemento().equals(elemento)){
+				  return true;
+			  }
+			  
+			  atual = atual.getProxima();
+			  
+		  }
+		  
+		  return false;
+	  
+	  }
 	  public void remove(int posicao){
 		  
 		  if(!this.posicaoOcupada(posicao)){
